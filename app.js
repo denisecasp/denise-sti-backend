@@ -3,11 +3,12 @@ const express = require("express")
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const rug = require('random-username-generator');
+const healthcheck = require("healthcheck");
 
 const app = express()
 const PORT = process.env.PORT || 3001
 
-let users = {};
+let users = [];
 app.use(function (req, res, next) {
    //res.setHeader('Content-Security-Policy', "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'");
    next();
@@ -32,7 +33,7 @@ app.get("/registerscore", (req ,res)=>{
    res.status(200).send({"status":"success"})
 })
 
-app.get("/post", (req ,res)=>{
+app.post("/registerscore", (req ,res)=>{
    headers={"http_status":200, "cache-control":  "no-cache"}
    let user = req.body.user;
    let score = req.body.score;
